@@ -7,11 +7,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const String appTitle = 'Flutter layout demo';
     return MaterialApp(
-      title: appTitle,
+
       home: Scaffold(
-        appBar: AppBar(title: const Text(appTitle)),
+
         // #docregion add-widget
         body: const SingleChildScrollView(
           child: Column(
@@ -90,9 +89,11 @@ class ButtonSection extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          ButtonWithText(color: color, icon: Icons.call, label: 'CALL'),
-          ButtonWithText(color: color, icon: Icons.near_me, label: 'ROUTE'),
-          ButtonWithText(color: color, icon: Icons.share, label: 'SHARE'),
+          ButtonWithText(color: Colors.black, icon: Icons.call, label: 'CALL'),
+          ButtonWithText(color:  Colors.black, icon: Icons.message, label: 'MESSAGE'),
+          ButtonWithText(color:  Colors.black, icon: Icons.email, label: 'EMAIL'),
+          ButtonWithText(color:  Colors.black, icon: Icons.share, label: 'SHARE'),
+          ButtonWithText(color:  Colors.black, icon: Icons.description, label: 'ETC'),
         ],
       ),
     );
