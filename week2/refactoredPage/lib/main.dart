@@ -17,19 +17,14 @@ class MyApp extends StatelessWidget {
             children: [
               ImageSection(image: 'images/lake.jpg'),
               TitleSection(
-                name: 'Oeschinen Lake Campground',
-                location: 'Kandersteg, Switzerland',
+                name: 'SangHeon Lee',
+                location: '22200514',
               ),
+              Divider(color: Colors.black,),
               ButtonSection(),
+              Divider(color: Colors.black,),
               TextSection(
-                description:
-                    'Lake Oeschinen lies at the foot of the Blüemlisalp in the '
-                    'Bernese Alps. Situated 1,578 meters above sea level, it '
-                    'is one of the larger Alpine Lakes. A gondola ride from '
-                    'Kandersteg, followed by a half-hour walk through pastures '
-                    'and pine forest, leads you to the lake, which warms to 20 '
-                    'degrees Celsius in the summer. Activities enjoyed here '
-                    'include rowing, and riding the summer toboggan run.',
+                
               ),
             ],
           ),
@@ -84,8 +79,8 @@ class ButtonSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Color color = Theme.of(context).primaryColor;
-    return SizedBox(
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
@@ -136,15 +131,18 @@ class ButtonWithText extends StatelessWidget {
 }
 
 class TextSection extends StatelessWidget {
-  const TextSection({super.key, required this.description});
-
-  final String description;
+  const TextSection({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(32),
-      child: Text(description, softWrap: true),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const MessageSection()
+        ],
+      ),
     );
   }
 }
@@ -200,7 +198,7 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
             icon: (_isFavorited
                 ? const Icon(Icons.star)
                 : const Icon(Icons.star_border)),
-            color: Colors.red[500],
+            color: const Color.fromARGB(255, 251, 255, 0),
             onPressed: _toggleFavorite,
           ),
         ),
@@ -208,4 +206,67 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
       ],
     );
   }
+}
+
+class MessageSection extends StatelessWidget {
+  const MessageSection({super.key});
+
+  final String description = 'Recent Message';
+  final String message = 'Long time no see!';
+
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: const [
+            Icon(Icons.message, size: 40),
+          ],
+        ),
+        
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(10, 0.0, 10, 0.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    description,
+                    style: const TextStyle(
+                      fontSize: 13,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Text(message),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+  /*
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Icon(Icons.message, size: 40),
+        Text(
+          description,
+          style: TextStyle(
+            fontSize: 13,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        Text(message),
+      ],
+    );
+  }*/
 }
