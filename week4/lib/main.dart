@@ -79,6 +79,9 @@ class _MyHomePageState extends State<MyHomePage> {
       case 1:
         page = FavoritesPage();
         break;
+      case 2:
+        page = ProfilePage();
+        break;
       default:
         throw UnimplementedError('no widget for $selectedIndex');
     }
@@ -110,9 +113,13 @@ class _MyHomePageState extends State<MyHomePage> {
                         label: 'Home',
                       ),
                       BottomNavigationBarItem(
-                        icon: Icon(Icons.favorite_outlined),
+                        icon: Icon(Icons.favorite_border),
                         label: 'Favorites',
                       ),
+                      BottomNavigationBarItem(
+                        icon: Icon(Icons.person_outline),
+                        label: 'Profile'
+                      )
                     ],
                     currentIndex: selectedIndex,
                     onTap: (value) {
@@ -139,6 +146,10 @@ class _MyHomePageState extends State<MyHomePage> {
                         icon: Icon(Icons.favorite_border),
                         label: Text('Favorites'),
                       ),
+                      NavigationRailDestination(
+                        icon: Icon(Icons.person_outline),
+                        label: Text('Profile'),
+                      )
                     ],
                     selectedIndex: selectedIndex,
                     onDestinationSelected: (value) {
@@ -291,6 +302,33 @@ class FavoritesPage extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+}
+
+class ProfilePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.only(top:80),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(50),
+              child: Image.network(
+                'https://cdn.assets.lomography.com/86/93d57e0bd8e88f6890c1687803700ab45f3007/576x576x2.jpg?auth=fb4474f73f10307f800cfe75a5a7052702f6d316',
+                width: 250,
+                height: 250,
+              ),
+            ),
+            SizedBox(height: 20),
+            Text('22200514', style: TextStyle(fontSize: 15)),
+            Text('LeeSangHeon', style: TextStyle(fontSize: 15)),
+          ],
+        ),
+      )
     );
   }
 }
