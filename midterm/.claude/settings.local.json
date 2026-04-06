@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git clone:*)",
+      "Bash(flutter pub get:*)",
+      "Bash(git checkout:*)",
+      "Bash(flutter analyze:*)"
+    ]
+  }
+}
