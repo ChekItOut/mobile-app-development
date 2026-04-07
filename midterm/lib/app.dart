@@ -17,6 +17,7 @@ import 'package:flutter/material.dart';
 import 'detail.dart';
 import 'home.dart';
 import 'login.dart';
+import 'model/favorite_list.dart';
 import 'model/hotel.dart';
 import 'signup.dart';
 
@@ -24,36 +25,41 @@ import 'signup.dart';
 class ShrineApp extends StatelessWidget {
   const ShrineApp({Key? key}) : super(key: key);
 
+  static final FavoriteList _favoriteList = FavoriteList();
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Shrine',
-      initialRoute: '/login',
-      routes: {
-        '/login': (BuildContext context) => const LoginPage(),
-        // TODO: Change to a Backdrop with a HomePage frontLayer (104)
-        '/': (BuildContext context) => const HomePage(),
-        // TODO: Make currentCategory field take _currentCategory (104)
-        // TODO: Pass _currentCategory for frontLayer (104)
-        // TODO: Change backLayer field value to CategoryMenuPage (104)
-        '/signup': (BuildContext context) => const SignupPage(),
-      },
-      onGenerateRoute: (RouteSettings settings) {
-        if (settings.name == DetailPage.routeName) {
-          final Object? args = settings.arguments;
-          assert(args is Hotel, 'DetailPage expects a Hotel argument.');
-          if (args is! Hotel) {
-            return null;
+    return FavoriteListScope(
+      favoriteList: _favoriteList,
+      child: MaterialApp(
+        title: 'Shrine',
+        initialRoute: '/login',
+        routes: {
+          '/login': (BuildContext context) => const LoginPage(),
+          // TODO: Change to a Backdrop with a HomePage frontLayer (104)
+          '/': (BuildContext context) => const HomePage(),
+          // TODO: Make currentCategory field take _currentCategory (104)
+          // TODO: Pass _currentCategory for frontLayer (104)
+          // TODO: Change backLayer field value to CategoryMenuPage (104)
+          '/signup': (BuildContext context) => const SignupPage(),
+        },
+        onGenerateRoute: (RouteSettings settings) {
+          if (settings.name == DetailPage.routeName) {
+            final Object? args = settings.arguments;
+            assert(args is Hotel, 'DetailPage expects a Hotel argument.');
+            if (args is! Hotel) {
+              return null;
+            }
+            return MaterialPageRoute<void>(
+              builder: (BuildContext context) => DetailPage(hotel: args),
+              settings: settings,
+            );
           }
-          return MaterialPageRoute<void>(
-            builder: (BuildContext context) => DetailPage(hotel: args),
-            settings: settings,
-          );
-        }
-        return null;
-      },
-      // TODO: Customize the theme (103)
-      theme: ThemeData.light(useMaterial3: true),
+          return null;
+        },
+        // TODO: Customize the theme (103)
+        theme: ThemeData.light(useMaterial3: true),
+      ),
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
+import 'model/favorite_list.dart';
 import 'model/hotel.dart';
 
 class DetailPage extends StatefulWidget {
@@ -16,12 +17,12 @@ class DetailPage extends StatefulWidget {
 }
 
 class _DetailPageState extends State<DetailPage> {
-  bool _isFavorite = false;
-
   @override
   Widget build(BuildContext context) {
     final Hotel hotel = widget.hotel;
     final ThemeData theme = Theme.of(context);
+    final FavoriteList favoriteList = FavoriteListScope.of(context);
+    final bool isFavorite = favoriteList.isFavorite(hotel.id);
 
     return Scaffold(
       appBar: AppBar(
@@ -45,9 +46,7 @@ class _DetailPageState extends State<DetailPage> {
                     color: Colors.transparent,
                     child: InkWell(
                       onDoubleTap: () {
-                        setState(() {
-                          _isFavorite = !_isFavorite;
-                        });
+                        favoriteList.toggle(hotel.id);
                       },
                       child: Hero(
                         tag: DetailPage.heroTag(hotel),
@@ -66,7 +65,7 @@ class _DetailPageState extends State<DetailPage> {
                     top: 10.0,
                     right: 10.0,
                     child: Icon(
-                      _isFavorite ? Icons.favorite : Icons.favorite_border,
+                      isFavorite ? Icons.favorite : Icons.favorite_border,
                       color: Colors.red,
                       size: 30.0,
                     ),
