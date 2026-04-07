@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'model/hotel.dart';
 
 class DetailPage extends StatefulWidget {
@@ -89,13 +89,27 @@ class _DetailPageState extends State<DetailPage> {
                       ),
                     ),
                     const SizedBox(height: 10.0),
-                    Text(
-                      hotel.name,
-                      style: theme.textTheme.headlineSmall?.copyWith(
-                        color: Colors.blue.shade900,
-                        fontWeight: FontWeight.bold,
+                    SizedBox(
+                      width: 250.0,
+                      child: DefaultTextStyle(
+                        style: theme.textTheme.headlineSmall!.copyWith(
+                          color: const Color.fromARGB(255, 1, 16, 223),
+                          fontWeight: FontWeight.bold,
+                        ),
+                        child: AnimatedTextKit(
+                          animatedTexts: [
+                            TypewriterAnimatedText(
+                              hotel.name,
+                              speed: const Duration(milliseconds: 100),
+                            ),
+                          ],
+                          totalRepeatCount: 1,
+                          displayFullTextOnTap: true,
+                          stopPauseOnTap: true,
+                        ),
                       ),
                     ),
+                  
                     const SizedBox(height: 14.0),
                     _InfoRow(
                       icon: Icons.location_on,
