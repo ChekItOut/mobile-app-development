@@ -41,31 +41,34 @@ class _DetailPageState extends State<DetailPage> {
             children: <Widget>[
               Stack(
                 children: <Widget>[
-                  Hero(
-                    tag: DetailPage.heroTag(hotel),
-                    child: SizedBox(
-                      width: double.infinity,
-                      height: 285.0,
-                      child: Image.asset(
-                        hotel.assetName,
-                        fit: BoxFit.cover,
+                  Material(
+                    color: Colors.transparent,
+                    child: InkWell(
+                      onDoubleTap: () {
+                        setState(() {
+                          _isFavorite = !_isFavorite;
+                        });
+                      },
+                      child: Hero(
+                        tag: DetailPage.heroTag(hotel),
+                        child: SizedBox(
+                          width: double.infinity,
+                          height: 285.0,
+                          child: Image.asset(
+                            hotel.assetName,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
                       ),
                     ),
                   ),
                   Positioned(
                     top: 10.0,
                     right: 10.0,
-                    child: IconButton(
-                      onPressed: () {
-                        setState(() {
-                          _isFavorite = !_isFavorite;
-                        });
-                      },
-                      icon: Icon(
-                        _isFavorite ? Icons.favorite : Icons.favorite_border,
-                        color: Colors.red,
-                        size: 30.0,
-                      ),
+                    child: Icon(
+                      _isFavorite ? Icons.favorite : Icons.favorite_border,
+                      color: Colors.red,
+                      size: 30.0,
                     ),
                   ),
                 ],
